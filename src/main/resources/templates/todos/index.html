@@ -62,7 +62,7 @@
     <thead>
     <tr>
         <th>Description</th>
-        <th>Starred</th>
+        <th>Important</th>
         <th>Completed</th>
         <th>Actions</th>
         <th>Delete</th>
@@ -80,7 +80,9 @@
                 <input type="hidden" name="id" th:value="${todo.id}" />
                 <input type="text" name="description" th:value="${todo.description}" />
                 <input type="checkbox" name="starred" th:checked="${todo.starred}" />
+                <span class="label">Mark Important</span>
                 <input type="checkbox" name="completed" th:checked="${todo.completed}" />
+                <span class="label">Mark Completed</span>
                 <button type="submit">Update</button>
             </form>
         </td>
@@ -96,7 +98,7 @@
 
 <form th:action="@{/todos/add}" method="post">
     <input type="text" name="description" placeholder="Description" required />
-    <input type="checkbox" name="starred" /> Starred
+    <input type="checkbox" name="starred" /> Important
     <input type="checkbox" name="completed" /> Completed
     <button type="submit">Add Todo</button>
 </form>

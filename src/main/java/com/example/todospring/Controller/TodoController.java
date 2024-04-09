@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ public class TodoController {
     @GetMapping
     public String getTodos(Model model) {
         List<Todo> todoList = todoService.getTodos();
+        Collections.sort(todoList, Comparator.comparingLong(Todo::getId));
         model.addAttribute("todos", todoList);
         return "todos/index";
     }
