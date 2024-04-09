@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Todos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Todos</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+        <th>Starred</th>
+        <th>Completed</th>
+        <th>Actions</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.description}"></td>
+        <td>
+            <input type="checkbox" th:checked="${todo.starred}" disabled="disabled" />
+        </td>
+        <td th:text="${todo.completed} ? 'Completed' : 'Pending'"></td>
+        <td>
+            <form th:action="@{/todos/update/{id}(id=${todo.id})}" method="post">
+                <input type="hidden" name="id" th:value="${todo.id}" />
+                <input type="text" name="description" th:value="${todo.description}" />
+                <input type="checkbox" name="starred" th:checked="${todo.starred}" />
+                <input type="checkbox" name="completed" th:checked="${todo.completed}" />
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/todos/delete/{id}(id=${todo.id})}" method="post">
+                <input type="hidden" name="id" th:value="${todo.id}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<form th:action="@{/todos/add}" method="post">
+    <input type="text" name="description" placeholder="Description" required />
+    <input type="checkbox" name="starred" /> Starred
+    <input type="checkbox" name="completed" /> Completed
+    <button type="submit">Add Todo</button>
+</form>
+</body>
+</html>
