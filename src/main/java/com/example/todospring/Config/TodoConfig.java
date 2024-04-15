@@ -23,8 +23,14 @@ public class TodoConfig {
                     false,
                     false
             );
+            Todo todo3 = new Todo(
+                3L,
+                "add another toto",
+                false,
+                false
+            );
             todoRepository.saveAll(
-                    List.of(todo1, todo2)
+                    List.of(todo1, todo2, todo3)
             );
         };
     }
