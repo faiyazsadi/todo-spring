@@ -49,7 +49,6 @@ public class TodoController {
         updateTodo.setCompleted(todoUpdateDto.isCompleted());
 
         todoService.save(updateTodo);
-        System.out.println("UPDATE");
         return "redirect:/todos";
     }
 
@@ -62,7 +61,6 @@ public class TodoController {
         Todo deleteTodo = todoOptional.get();
 
         todoService.delete(deleteTodo);
-        System.out.println("DELETE");
         return "redirect:/todos";
     }
 
