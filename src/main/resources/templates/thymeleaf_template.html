@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PDF Template</title>
+</head>
+<body>
+<h1>PDF Template</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.description}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
